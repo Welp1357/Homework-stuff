@@ -4,7 +4,7 @@ public class Game {
 
     public static void main(String [] args) {
         Board b = new Board();
-        b.printBoard();
+        b.printBoard(); //is this redundant?
 
         Scanner scnr = new Scanner(System.in); // creating a new scanner for user input --> note scanner should be outside the loop
 
@@ -12,7 +12,6 @@ public class Game {
  
             String player = "O";
 
-            String player2 = "X";
 
             while (gameLoop) {
 
@@ -33,7 +32,7 @@ public class Game {
                 } else {
 
                     System.out.println("Try again with another input.");
-
+                    continue; //return replayed with contine
                 }
 
 
@@ -41,17 +40,28 @@ public class Game {
 
                     System.out.println("That space is available, good move!");
 
-                    b.changePosition(position, player);
 
                 } else {
 
                     System.out.println("Unfortunately that space isnt available, try again.");
-                    
+                    continue; //return replayed with contine
                 }
+
+
+                    
+                    if(b.checkWin()) {
+                        System.out.println(player + " has won the game.");
+                        break;
+                    }
 
 
 
                 b.printBoard(); //needs to come at the very end because that shows the last move
+
+
+                
+
+
 
 
                 // how can i make it so that players switch turns?
