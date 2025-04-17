@@ -6,24 +6,25 @@ public class Game {
         Board b = new Board();
         b.printBoard();
 
+        Scanner scnr = new Scanner(System.in); // creating a new scanner for user input --> note scanner should be outside the loop
 
+            boolean gameLoop = true; //need to make sure the game loops after each round. could maybe be accomplished with a while loop?
  
+            String player = "O";
 
+            String player2 = "X";
 
             while (gameLoop) {
 
-                System.out.println("Where would you like to place the O Token?");
+                System.out.println("Where would you like to place the Token?");
                     
                 System.out.println("Choose a number between 1-9");
 
-                    Scanner scnr = new Scanner(System.in); // creating a new scanner for user input
-
+                    b.printBoard();
 
                     int numberCheck = scnr.nextInt(); // validating the new integer to variable numberCheck
 
-                    String position = Integer.toString(numberCheck);
-
-                    scnr.close();
+                    String position = Integer.toString(numberCheck); //converting int to String
 
                 if(numberCheck >= 1 && numberCheck <=9) {
                     
@@ -34,10 +35,14 @@ public class Game {
                     System.out.println("Try again with another input.");
 
                 }
-        
+
+
                 if(b.checkSpace(position)) {
+
                     System.out.println("That space is available, good move!");
-                
+
+                    b.changePosition(position, player);
+
                 } else {
 
                     System.out.println("Unfortunately that space isnt available, try again.");
@@ -46,14 +51,27 @@ public class Game {
 
 
 
-                    b.changePosition(position, "O");
+                b.printBoard(); //needs to come at the very end because that shows the last move
+
+
+                // how can i make it so that players switch turns?
+
+                if(player.equals("O")) {
                     
-                    b.printBoard();
+                    player = "X";
+                    
+                    b.changePosition(position, player); //switching players
+
+                } else 
+                { player = "O";
+                
+                }
+
+
 
             }   
 
-
-        
+        scnr.close();
 
     }
 }
